@@ -1,0 +1,129 @@
+#:kivy 1.0.9
+
+<MatchWidget>:
+    canvas:
+        # draw a background of red. This will be the border
+        Color:
+            rgba: (0.5,0.5,0.5,1)
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+
+        # draw over the above except for 5 pixels around edges, leaving the red border showing
+        Color:
+            rgba: (0,0,0,1)
+        RoundedRectangle:
+            pos: self.x+5, self.y+5
+            size: self.width-10, self.height-10
+
+<TournamentWindow>:
+    name: "tournament"
+
+    # necessary for access in python code
+    round_label: round_label
+    match_scroll_view: match_scroll_view
+    ranking_scroll_view: ranking_scroll_view
+    next_round_button: next_round_button
+    game_overview_button: game_overview_button
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+
+        Label:
+            text: '[b][size=40]Turnierübersicht[/b][/size]'
+            markup: True
+            text_size: self.size
+            height: 35
+            halign: 'center'
+            valign: 'middle'
+            size_hint: (1, None)
+
+        GridLayout:
+            rows: 1
+            cols: 3
+            size_hint: (1, None)
+
+            Label:
+                id: round_label
+                text: '[size=25]Runde: 0[/size]'
+                markup: True
+                text_size: self.size
+                height: 35
+                halign: 'left'
+                valign: 'middle'
+                size_hint: (1, None)
+
+            Label:
+                text: ''
+                markup: True
+                text_size: self.size
+                height: 35
+                halign: 'left'
+                valign: 'middle'
+                size_hint: (1, None)
+
+            Button:
+                id: game_overview_button
+                text: '[size=25]Alle Spiele[/size]'
+                markup: True
+                text_size: self.size
+                height: 50
+                halign: 'center'
+                valign: 'middle'
+                size_hint: (0.2, None)
+                disabled: False
+                on_release:
+                    root.manager.transition.direction = 'left'
+                    root.manager.current = 'game_overview'
+
+        BoxLayout:
+            orientation: 'horizontal'
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: (0.7, 1)
+
+                Label:
+                    text: '[b][size=35]Laufende Begegnungen[/size][/b]'
+                    markup: True
+                    text_size: self.size
+                    height: 70
+                    halign: 'center'
+                    valign: 'middle'
+                    size_hint: (1, None)
+
+                ScrollView:
+                    id: match_scroll_view
+                    do_scroll_x: False
+                    do_scroll_y: True
+
+            BoxLayout:
+                orientation: 'vertical'
+                size_hint: (0.3, 1)
+
+                Label:
+                    text: '[b][size=35]Ranking[/size][/b]'
+                    markup: True
+                    text_size: self.size
+                    height: 70
+                    halign: 'center'
+                    valign: 'middle'
+                    size_hint: (1, None)
+
+                ScrollView:
+                    id: ranking_scroll_view
+                    do_scroll_x: False
+                    do_scroll_y: True
+
+        Button:
+            id: next_round_button
+            text: '[size=25]Nächste Runde[/size]'
+            markup: True
+            text_size: self.size
+            height: 30
+            halign: 'center'
+            valign: 'middle'
+            on_release: root.generate_next_round()
+            disabled: 'True'
+            size_hint: (1, 0.1)

@@ -1,0 +1,28 @@
+[
+  {
+    "name": "Max Mustermann",
+    "ttr": 1600,
+    "handicap": 0
+  },
+  {
+    "name": "Stefan Mustermann",
+    "ttr": 1500,
+    "handicap": 1
+  },
+  {
+    "name": "Annika Musterfrau",
+    "ttr": 1480,
+    "handicap": 1
+  },
+  {
+    "name": "Xandi Mustermann",
+    "nickname": "Xandi",
+    "ttr": 1433,
+    "handicap": 2
+  },
+  {
+    "name": "Günther Mustermann",
+    "ttr": 988,
+    "handicap": 7
+  }
+]

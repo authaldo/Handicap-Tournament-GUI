@@ -1,0 +1,11 @@
+buildozer_venv
+kivy_venv
+bin
+.idea
+__pycache__
+*/__pycache__
+.buildozer
+runtime_storage
+resources
+round_robin.py
+test

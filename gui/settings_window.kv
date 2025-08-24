@@ -1,0 +1,187 @@
+#:kivy 1.0.9
+
+#:set button_height 40
+#:set label_height 50
+
+<SettingsWindow>:
+    name: "settings"
+
+    # necessary for access in python code
+    player_path_label: player_path_label
+    scroll_view: scroll_view
+    player_count_label: player_count_label
+    round_label: round_label
+    continue_button: continue_button
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+
+        Label:
+            text: '[b][size=40]Einstellungen[/b][/size]'
+            markup: True
+            text_size: self.size
+            halign: 'center'
+            valign: 'middle'
+            size_hint: (1, None)
+
+        Label:
+            text: '[b][size=35]Allgemeines[/size][/b]'
+            markup: True
+            text_size: self.size
+            halign: 'center'
+            valign: 'top'
+            size_hint: (1, None)
+
+        GridLayout:
+            cols: 2
+            rows: 4
+            padding: 0
+            spacing: 10
+            row_height: 50
+            size_hint: (1, 0.4)
+
+            Label:
+                text: '[size=30]Spielerdatei:[/size]'
+                markup: True
+                height: label_height
+                halign: 'left'
+                valign: 'middle'
+                size_hint: (0.2, 1)
+
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    id: player_path_label
+                    text: ''
+                    markup: True
+                    halign: 'center'
+                    valign: 'bottom'
+
+                Button:
+                    text: '[size=30]Datei ändern[/size]'
+                    markup: True
+                    height: button_height
+                    on_release: root.show_load()
+
+            Label:
+                text: '[size=30]Spielmodus:[/size]'
+                markup: True
+                height: label_height
+                halign: 'left'
+                valign: 'middle'
+                size_hint: (0.2, 1)
+
+            BoxLayout:
+                orientation: 'horizontal'
+                ToggleButton:
+                    id: best_of_two_button
+                    text: '[size=30]Zwei Gewinnsätze[/size]'
+                    text_size: self.size
+                    markup: True
+                    height: button_height
+                    halign: 'center'
+                    valign: 'middle'
+                    on_release: root.update_match_mode_buttons(best_of_two_button, best_of_three_button, 2)
+                    state: 'normal'
+
+                ToggleButton:
+                    id: best_of_three_button
+                    text: '[size=30]Drei Gewinnsätze[/size]'
+                    text_size: self.size
+                    markup: True
+                    height: button_height
+                    halign: 'center'
+                    valign: 'middle'
+                    on_release: root.update_match_mode_buttons(best_of_three_button, best_of_two_button, 3)
+                    state: 'down'
+
+            Label:
+                text: '[size=30]Handicap:[/size]'
+                markup: True
+                height: label_height
+                halign: 'left'
+                valign: 'middle'
+                size_hint: (0.2, 1)
+
+            BoxLayout:
+                orientation: 'horizontal'
+                ToggleButton:
+                    id: handicap_true_button
+                    text: '[size=30]Ja[/size]'
+                    text_size: self.size
+                    markup: True
+                    height: button_height
+                    halign: 'center'
+                    valign: 'middle'
+                    on_release: root.update_handicap_buttons(handicap_true_button, handicap_false_button, True)
+                    state: 'down'
+
+                ToggleButton:
+                    id: handicap_false_button
+                    text: '[size=30]Nein[/size]'
+                    markup: True
+                    text_size: self.size
+                    height: button_height
+                    halign: 'center'
+                    valign: 'middle'
+                    on_release: root.update_handicap_buttons(handicap_false_button, handicap_true_button, False)
+                    state: 'normal'
+
+        Label:
+            text: ''
+            height: 50
+            size_hint: (1, None)
+
+        Label:
+            text: '[b][size=35]Spielerauswahl[/size][/b]'
+            markup: True
+            height: 30
+            halign: 'center'
+            valign: 'bottom'
+            size_hint: (1, None)
+
+        Label:
+            text: ''
+            height: 10
+            size_hint: (1, None)
+
+        ScrollView:
+            id: scroll_view
+            do_scroll_x: False
+            do_scroll_y: True
+            size_hint: (1, 1)
+
+        Label:
+            text: ''
+            height: 10
+            size_hint: (1, None)
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint: (1, 0.1)
+
+            Label:
+                id: player_count_label
+                text: 'Anzahl Spieler: 0'
+                text_size: self.size
+                markup: True
+                height: 50
+                halign: 'center'
+                valign: 'middle'
+
+            Label:
+                id: round_label
+                text: 'Rundenempfehlung: 0'
+                text_size: self.size
+                markup: True
+                height: 50
+                halign: 'center'
+                valign: 'middle'
+
+            Button:
+                id: continue_button
+                text: '[size=20]Bestätigen[/size]'
+                markup: True
+                on_release: root.manager.current = 'tournament'
+                disabled: True

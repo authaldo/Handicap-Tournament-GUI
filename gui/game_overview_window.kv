@@ -1,0 +1,62 @@
+#:kivy 1.0.9
+
+<GameOverviewWindow>:
+    name: "game_overview"
+
+    # necessary for access in python code
+    scroll_view: scroll_view
+    back_button: back_button
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+
+        Label:
+            text: '[b][size=40]Alle Spiele[/b][/size]'
+            markup: True
+            text_size: self.size
+            height: 50
+            halign: 'center'
+            valign: 'middle'
+            size_hint: (1, None)
+
+        ScrollView:
+            id: scroll_view
+            do_scroll_x: False
+            do_scroll_y: True
+            size_hint: (1, 1)
+
+        Label:
+            text: ''
+            height: 10
+            size_hint: (1, None)
+
+        Button:
+            id: back_button
+            text: '[size=25]Zurück[/size]'
+            markup: True
+            size_hint: (1, 0.08)
+            height: 30
+            on_release:
+                root.manager.transition.direction = 'right'
+                root.manager.current = 'tournament'
+
+
+<LoadDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Load"
+                on_release: root.load(filechooser.path, filechooser.selection)

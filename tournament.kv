@@ -1,0 +1,14 @@
+#:kivy 1.0.9
+
+#  include the kv files for the other Screens
+#: include gui/settings_window.kv
+#: include gui/tournament_window.kv
+#: include gui/game_overview_window.kv
+
+WindowManager:
+    SettingsWindow:
+        id: settings_window
+    TournamentWindow:
+        id: tournament_window
+    GameOverviewWindow:
+        id: game_overview_window
