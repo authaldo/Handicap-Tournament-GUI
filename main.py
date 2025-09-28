@@ -5,6 +5,7 @@ from kivy.uix.screenmanager import ScreenManager
 from gui.settings_window import SettingsWindow
 from gui.tournament_window import TournamentWindow
 from gui.game_overview_window import GameOverviewWindow
+from gui.results_window import ResultsWindow
 
 class WindowManager(ScreenManager):
     pass

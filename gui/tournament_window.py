@@ -186,6 +186,7 @@ class TournamentWindow(Screen):
     match_scroll_view = ObjectProperty(None)
     ranking_scroll_view = ObjectProperty(None)
     next_round_button = ObjectProperty(None)
+    finish_tournament_button = ObjectProperty(None)
     game_overview_button = ObjectProperty(None)
 
     def __init__(self, **kwargs):
@@ -249,6 +250,7 @@ class TournamentWindow(Screen):
         self.update_visualization()
 
         self.next_round_button.disabled = True
+        self.finish_tournament_button.disabled = True
 
     def check_for_updates(self, match_finished):
         if match_finished:
@@ -266,6 +268,8 @@ class TournamentWindow(Screen):
             self.next_round_button.disabled = not all_finished
         else:
             self.next_round_button.disabled = True
+
+        self.finish_tournament_button.disabled = not all_finished or self._tournament.get_current_round() == 1
 
         # store current state in text file
         open_matches_string = f"\nRunde: {self._tournament.get_current_round()}\n"
@@ -292,7 +296,7 @@ class TournamentWindow(Screen):
         num_matches = len(self._tournament.get_running_matches())
         num_cols = 2
         num_rows = int(math.ceil(num_matches / num_cols))
-        row_height = min(max(self.get_root_window().height * 0.8 / num_rows, 175), 250)
+        row_height = min(max(self.get_root_window().height * 0.8 / num_rows, 225), 250)
 
         self.match_scroll_view.clear_widgets()
         self._grid_layout = GridLayout(cols=num_cols, rows=num_rows, spacing=spacing, size_hint_y=None, size_hint_x=1,
@@ -345,3 +349,9 @@ class TournamentWindow(Screen):
 
     def get_played_games(self):
         return self._tournament.get_all_matches()
+
+    def get_tournament(self):
+        return self._tournament
+
+    def get_tournament_storage_path(self):
+        return os.path.dirname(self._file_path)

@@ -210,6 +210,12 @@ class Tournament:
     def get_all_matches(self):
         return self._finished_matches + [self._round_matches]
 
+    def get_players(self):
+        return self._players
+
+    def num_sets_for_win(self):
+        return int(self._win_condition)
+
     def _generate_match(self, p1, p2):
         if self._with_handicaps:
             start_offset = p1.handicap - p2.handicap

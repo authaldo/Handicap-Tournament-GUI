@@ -24,6 +24,7 @@
     match_scroll_view: match_scroll_view
     ranking_scroll_view: ranking_scroll_view
     next_round_button: next_round_button
+    finish_tournament_button: finish_tournament_button
     game_overview_button: game_overview_button
 
     BoxLayout:
@@ -68,7 +69,7 @@
                 text: '[size=25]Alle Spiele[/size]'
                 markup: True
                 text_size: self.size
-                height: 50
+                height: 60
                 halign: 'center'
                 valign: 'middle'
                 size_hint: (0.2, None)
@@ -116,14 +117,36 @@
                     do_scroll_x: False
                     do_scroll_y: True
 
-        Button:
-            id: next_round_button
-            text: '[size=25]Nächste Runde[/size]'
-            markup: True
-            text_size: self.size
-            height: 30
-            halign: 'center'
-            valign: 'middle'
-            on_release: root.generate_next_round()
-            disabled: 'True'
-            size_hint: (1, 0.1)
+        Label:
+            text: ''
+            height: 10
+            size_hint: (1, None)
+
+        BoxLayout:
+            orientation: 'horizontal'
+            height: 75
+            size_hint: (1, None)
+
+            Button:
+                id: next_round_button
+                text: '[size=25]Nächste Runde[/size]'
+                markup: True
+                text_size: self.size
+                height: 60
+                halign: 'center'
+                valign: 'middle'
+                on_release: root.generate_next_round()
+                disabled: 'True'
+
+            Button:
+                id: finish_tournament_button
+                text: '[size=25]Turnier beenden[/size]'
+                markup: True
+                text_size: self.size
+                height: 60
+                halign: 'center'
+                valign: 'middle'
+                disabled: 'True'
+                on_release:
+                    root.manager.transition.direction = 'up'
+                    root.manager.current = 'results'

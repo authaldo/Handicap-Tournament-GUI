@@ -152,7 +152,7 @@ class SettingsWindow(Screen):
     def update_player_selection(self):
         spacing = 0
         row_height = 100
-        num_rows = len(self._all_players) // 2
+        num_rows = math.ceil(len(self._all_players) / 2)
         self.scroll_view.clear_widgets()
         self._player_toggle_buttons = []
         grid_layout = GridLayout(cols=4, rows=num_rows, spacing=spacing, size_hint_y=None, size_hint_x=1,

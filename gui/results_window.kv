@@ -1,0 +1,52 @@
+#:kivy 1.0.9
+
+<ResultsWindow>:
+    name: "results"
+
+    # necessary for access in python code
+    box_layout: box_layout
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+
+        Label:
+            text: '[b][size=40]Siegerliste[/b][/size]'
+            markup: True
+            text_size: self.size
+            height: 50
+            halign: 'center'
+            valign: 'middle'
+            size_hint: (1, None)
+
+        Label:
+            text: '[b][size=40][/b][/size]'
+            markup: True
+            text_size: self.size
+            height: 50
+            halign: 'center'
+            valign: 'middle'
+            size_hint: (1, None)
+
+        ScrollView:
+            id: scroll_view
+            do_scroll_x: False
+            do_scroll_y: True
+            size_hint: (1, 1)
+
+            BoxLayout:
+                id: box_layout
+                orientation: 'vertical'
+                padding: 10
+
+#                Label:
+#                    text: '[b][size=30]Heutiges Turnier[/b][/size]'
+#                    markup: True
+#                    text_size: self.size
+#                    height: 50
+#                    halign: 'center'
+#                    valign: 'middle'
+#                    size_hint: (1, None)
+
+                GridLayout:
+                    id: grid_layout
